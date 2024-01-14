@@ -20,5 +20,7 @@ namespace Reversi.Model
             Players_brush = brush;
             ID = id;
         }
+
+       
     }
 }

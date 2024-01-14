@@ -29,7 +29,7 @@ namespace Reversi
         public ViewModel()
         {
             Visibility = "Hidden";
-            gameSetter = new GameSetter();
+            gameSetter = new GameSetter();         
         }
 
         public void Create_GameAttributes(int h, bool single_player, string name1, string name2)

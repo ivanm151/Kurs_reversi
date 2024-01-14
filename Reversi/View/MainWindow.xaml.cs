@@ -1,4 +1,5 @@
-﻿using Reversi.Model;
+﻿using Microsoft.Win32;
+using Reversi.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 
 
 namespace Reversi.View
@@ -38,7 +40,12 @@ namespace Reversi.View
         {
             MessageBox.Show("Введите числа от 8 до 20!");
         }
-        
+
+        private void SaveCurrentGame()
+        {
+            
+        }
+
         private void EndGame()
         {
             int Score1 = ((ViewModel)DataContext).Game.Player1.Score;
