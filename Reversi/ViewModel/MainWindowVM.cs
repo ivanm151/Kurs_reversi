@@ -70,7 +70,6 @@ namespace Reversi
         private Command save;
         public Command Save
         {
-
             get
             {
                 return save ?? (save = new Command(obj =>
@@ -90,7 +89,6 @@ namespace Reversi
         private Command load;
         public Command Load
         {
-
             get
             {
                 return load ?? (load = new Command(obj =>
@@ -130,17 +128,14 @@ namespace Reversi
                 Game.Player2.Score = Convert.ToInt32(score2);
                 Game.ActivePlayer.Player_name = active;*/
 
-                /*int count = 0;
+                int count = 0;
                 for(int i = 0; i < Convert.ToInt32(height); i++)
                     for(int j = 0; j < Convert.ToInt32(height); j++)
                     {
                         Game.Add_Marker(i, j, markers[count]);
                         count++;
-                    }*/
-                
-
-            }
-            
+                    }
+            }            
         }
 
         public void Create_GameAttributes(int h, bool single_player, string name1, string name2)
@@ -151,8 +146,7 @@ namespace Reversi
             computerTurnInProcess = false;
             if (single_player)
                 Comp_player = new Computer_Player(Game.Player2);
-            ShowActivePlayer.Invoke();
-            
+            ShowActivePlayer.Invoke();          
         }
 
         private void Display_Init_Gameset()
@@ -209,7 +203,6 @@ namespace Reversi
                 ShowActivePlayer.Invoke();
             }
             computerTurnInProcess = false;
-
         }
 
         private void ProcessEndGame()
@@ -221,7 +214,6 @@ namespace Reversi
         private Command startGame;
         public Command StartGame
         {
-
             get
             {
                 return startGame ?? (startGame = new Command(obj =>
@@ -244,10 +236,7 @@ namespace Reversi
                     FieldHeight = "";
                 }));
             }
-        }
-
-        
-
+        }        
         private string fieldHeight;
         public string FieldHeight
         {

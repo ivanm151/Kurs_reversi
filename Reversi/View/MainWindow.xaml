@@ -40,6 +40,6 @@
             
 
         </StackPanel>
-        <Button HorizontalAlignment="Left" Margin="132,342,0,0" Grid.Row="1" VerticalAlignment="Top" x:Name="Load" Command="{Binding Load}" Content="Загрузить"/>
+        <Button HorizontalAlignment="Left" Margin="53,332,0,0" Grid.Row="1" VerticalAlignment="Top" x:Name="Load" Command="{Binding Load}" Content="Загрузить"/>
     </Grid>
 </Window>
