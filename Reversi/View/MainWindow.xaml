@@ -27,7 +27,7 @@
             </StackPanel>
         </GroupBox>
 
-        <Button Command="{Binding StartGame}"  Grid.Column="0" Grid.Row="1" Content="Начать новую игру" HorizontalAlignment="Left" Margin="22,285.6,0,0" VerticalAlignment="Top" Width="120"  Height="31"/>
+        <Button Command="{Binding StartGame}"  Grid.Column="0" Grid.Row="1" Content="Начать новую игру" HorizontalAlignment="Left" Margin="22,285.6,0,0" VerticalAlignment="Top" Width="120"  Height="31" IsDefault="True"/>
         
         <TextBlock HorizontalAlignment="Left" Margin="22,38.6,0,0" Grid.Row="1" TextWrapping="WrapWithOverflow" Text="Задайте сторону поля" VerticalAlignment="Top" Height="35" Width="105"/>
         <StackPanel x:Name="CurrentInfo" Grid.Row="1" Grid.Column="2" Visibility="{Binding Visibility}">

@@ -21,10 +21,10 @@ namespace Reversi.Model
         public Markers CreateGameField()
         {
             Markers markers = new Markers(height);
-            Set_Init_Disks(markers);
+            Set_Init_Markers(markers);
             return markers;
         }
-        private void Set_Init_Disks(Markers markers)
+        private void Set_Init_Markers(Markers markers)
         {
             Markers.Marker[,] Placed_markers = markers.Placed_markers;
             height = Placed_markers.GetLength(0) - 1;
@@ -80,13 +80,13 @@ namespace Reversi.Model
         }
         public void Add_Marker(int r, int c)
         {
-            Placed.Add_Marker(r, c, ActivePlayer); // Обращение к классу поля, помещение диска в массив фишек
-            SetActivePlayer(); // Смена активного игрока по завершении хода
-            CalculateScore(); // Вычисление значений счёта игроков
+            Placed.Add_Marker(r, c, ActivePlayer); 
+            SetActivePlayer(); 
+            CalculateScore();
             if (Player1.Score + Player2.Score == Placed.Placed_markers.Length)
             {
                 gameFinished = true;
-            } // Если количество фишек, поставленных игроками, равно размеру поля, то игра окончена
+            }
         }
         public void CalculateScore()
         {

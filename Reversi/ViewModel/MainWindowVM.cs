@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
-
-
+using System.Collections.Specialized;
+using System.Windows;
 
 namespace Reversi
 {
@@ -24,12 +25,19 @@ namespace Reversi
         private bool single_player;
         private Computer_Player Comp_player;
         private bool computerTurnInProcess;
-        private GameSetter gameSetter;
+        private GameSetter gameSetter;       
+        private int low;
+        private int high;
+
         
         public ViewModel()
         {
             Visibility = "Hidden";
-            gameSetter = new GameSetter();         
+            gameSetter = new GameSetter();
+            var appSettings = ConfigurationManager.AppSettings;
+            low = Convert.ToInt32(appSettings["low"]);
+            high = Convert.ToInt32(appSettings["high"]);
+            
         }
 
         public void Create_GameAttributes(int h, bool single_player, string name1, string name2)
@@ -110,6 +118,7 @@ namespace Reversi
         private Command startGame;
         public Command StartGame
         {
+
             get
             {
                 return startGame ?? (startGame = new Command(obj =>
@@ -117,7 +126,7 @@ namespace Reversi
                     try
                     {
                         int h = int.Parse(FieldHeight);
-                        if (h < 8 || h > 20)
+                        if (h < low || h > high)
                             IncorrectInput.Invoke();
                         else
                         {
