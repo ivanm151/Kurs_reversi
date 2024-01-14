@@ -2,7 +2,9 @@
 using Reversi.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -41,10 +43,7 @@ namespace Reversi.View
             MessageBox.Show("Введите числа от 8 до 20!");
         }
 
-        private void SaveCurrentGame()
-        {
-            
-        }
+        
 
         private void EndGame()
         {

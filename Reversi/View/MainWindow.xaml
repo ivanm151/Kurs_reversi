@@ -36,7 +36,10 @@
             <Ellipse x:Name ="CurrentPlayerBrush"  Fill="White"  HorizontalAlignment="Left" Height="22" Margin="30,0,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="22"/>
             <Label Content="Счёт:" HorizontalAlignment="Left" Margin="0,30,0,0"  VerticalAlignment="Top" RenderTransformOrigin="0.591,1.705"/>
             <Label x:Name="Score" Content="" HorizontalAlignment="Left" Margin="60,-25,0,0" Width="16" RenderTransformOrigin="0.804,0.058"/>
+            <Button x:Name="save" Command="{Binding Save}" Content="Сохранить"/>
+            
 
         </StackPanel>
+        <Button HorizontalAlignment="Left" Margin="132,342,0,0" Grid.Row="1" VerticalAlignment="Top" x:Name="Load" Command="{Binding Load}" Content="Загрузить"/>
     </Grid>
 </Window>

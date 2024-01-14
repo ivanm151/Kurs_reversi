@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using static Reversi.Model.Markers;
 
 namespace Reversi.Model
 {
@@ -88,6 +89,14 @@ namespace Reversi.Model
                 gameFinished = true;
             }
         }
+        public void Add_Marker(int r, int c, char playername)
+        {
+            if(playername == '1')
+                Placed.Add_Marker(r, c, Player1);
+
+            else if (playername == '2')
+                Placed.Add_Marker(r, c, Player2);                      
+        }
         public void CalculateScore()
         {
             (Player1.Score, Player2.Score) = Placed.CalcScore();
@@ -99,7 +108,7 @@ namespace Reversi.Model
             else
                 return new Player("Дружба", null, Player1.Score);
         }
-        public int[] DisksToInt()
+        public int[] MarkersToInt()
         {
             Markers.Marker[,] markers = Placed.Placed_markers;
             int h = markers.GetLength(0);
@@ -113,6 +122,29 @@ namespace Reversi.Model
                         toInt[i, j] = markers[i, j].OwnerID;
                 }
             return toInt.Cast<int>().ToArray();
+        }
+        public string Stroka()
+        {
+            string s = "";
+            Markers.Marker[,] markers = Placed.Placed_markers;
+            int h = markers.GetLength(0);
+            int[,] toInt = new int[h, h];
+            for (int i = 0; i < h; i++)
+                for (int j = 0; j < h; j++)
+                {
+                    if (markers[i, j] == null)
+                        toInt[i, j] = 0;
+                    else
+                        toInt[i, j] = markers[i, j].OwnerID;
+                    s += toInt[i, j].ToString();
+                }
+            return s;
+        }
+        public int GetHeight()
+        {
+            Markers.Marker[,] markers = Placed.Placed_markers;
+            int h = markers.GetLength(0);
+            return h;
         }
     }
 }

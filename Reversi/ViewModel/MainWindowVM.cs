@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Shapes;
 using System.Collections.Specialized;
 using System.Windows;
+using System.IO;
+using System.Xml.Linq;
 
 namespace Reversi
 {
@@ -26,6 +28,7 @@ namespace Reversi
         private Computer_Player Comp_player;
         private bool computerTurnInProcess;
         private GameSetter gameSetter;       
+
         private int low;
         private int high;
 
@@ -34,9 +37,109 @@ namespace Reversi
         {
             Visibility = "Hidden";
             gameSetter = new GameSetter();
+
             var appSettings = ConfigurationManager.AppSettings;
             low = Convert.ToInt32(appSettings["low"]);
-            high = Convert.ToInt32(appSettings["high"]);
+            high = Convert.ToInt32(appSettings["high"]);          
+        }
+
+        public void SaveGame()
+        {
+            var height = Game.GetHeight();
+            var score1 = Game.Player1.Score;
+            var score2 = Game.Player2.Score;
+            var active = Game.ActivePlayer.Player_name;
+            var markers = Game.Stroka();         
+            var fileName = "saveGame.txt";
+
+            using (StreamWriter sw = File.CreateText(fileName))
+            {
+                sw.Write(height);
+                sw.Write("\n");
+                sw.Write(score1);
+                sw.Write("\n");
+                sw.Write(score2);
+                sw.Write("\n");
+                sw.Write(active);
+                sw.Write("\n");
+                sw.Write(markers);
+                sw.Write("\n");               
+            }
+        }
+
+        private Command save;
+        public Command Save
+        {
+
+            get
+            {
+                return save ?? (save = new Command(obj =>
+                {
+                    try
+                    {
+                        SaveGame();
+                    }
+                    catch
+                    {
+                        IncorrectInput.Invoke();
+                    }                   
+                }));
+            }
+        }
+
+        private Command load;
+        public Command Load
+        {
+
+            get
+            {
+                return load ?? (load = new Command(obj =>
+                {
+                    try
+                    {
+                        LoadGame();
+                    }
+                    catch
+                    {
+                        IncorrectInput.Invoke();
+                    }
+                }));
+            }
+        }
+        public void LoadGame()
+        {
+            var inputFileName = "saveGame.txt";
+            string fileContents;
+            using (StreamReader sr = File.OpenText(inputFileName))
+            {
+                fileContents = sr.ReadLine();
+                var height = fileContents;
+                fileContents = sr.ReadLine();
+                var score1 = fileContents;
+                fileContents = sr.ReadLine();
+                var score2 = fileContents;
+                fileContents = sr.ReadLine();
+                var active = fileContents;
+                fileContents = sr.ReadLine();
+                var markers = fileContents;
+
+                
+                //Game = gameSetter.MakeGame("Игрок 1", "Игрок 2", false, new NewGame(Convert.ToInt32(height)));
+                //Create_GameAttributes(Convert.ToInt32(height), false, "Игрок 1", "Игрок 2");
+                /*Game.Player1.Score = Convert.ToInt32(score1);
+                Game.Player2.Score = Convert.ToInt32(score2);
+                Game.ActivePlayer.Player_name = active;*/
+
+                /*int count = 0;
+                for(int i = 0; i < Convert.ToInt32(height); i++)
+                    for(int j = 0; j < Convert.ToInt32(height); j++)
+                    {
+                        Game.Add_Marker(i, j, markers[count]);
+                        count++;
+                    }*/
+                
+
+            }
             
         }
 
