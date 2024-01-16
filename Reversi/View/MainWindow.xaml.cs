@@ -14,6 +14,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -33,6 +34,7 @@ namespace Reversi.View
             ((ViewModel)DataContext).AddDiskToField += RenewGameArea;
             ((ViewModel)DataContext).ShowActivePlayer += ChangeCurrentInfo;            
             ((ViewModel)DataContext).StartNewGame += Start_Click;
+            ((ViewModel)DataContext).LoadGame1 += LoadGame2;
             ((ViewModel)DataContext).IncorrectInput += IncorrectInput;
             ((ViewModel)DataContext).EndGame += EndGame;
             
@@ -40,7 +42,7 @@ namespace Reversi.View
 
         private void IncorrectInput()
         {
-            MessageBox.Show("Введите числа от 8 до 20!");
+            MessageBox.Show("Введите числа от 8 до 15!");
         }
 
         
@@ -64,6 +66,21 @@ namespace Reversi.View
             CurrentPlayerName.Content = player.Player_name;
             CurrentPlayerBrush.Fill = player.Players_brush;
             Score.Content = player.Score;
+        }
+        private void ChangeScore()
+        {
+            Player player1 = ((ViewModel)DataContext).Game.Player1;
+            CurrentPlayerName.Content = player1.Player_name;            
+            Score.Content = player1.Score;
+
+            Player player2 = ((ViewModel)DataContext).Game.Player2;
+            CurrentPlayerName.Content = player2.Player_name;
+            Score.Content = player2.Score;
+        }
+        private void LoadGame2()
+        {
+            Start_Click();
+            ChangeScore();
         }
 
         private void DrawGameArea(int field_height, int side = 20)
@@ -117,6 +134,7 @@ namespace Reversi.View
         private void Clear()
         {
             GameArea.Children.Clear();
+            
         }
         private void Start_Click()
         {
@@ -126,6 +144,7 @@ namespace Reversi.View
             DrawGameArea(height);
             ((ViewModel)DataContext).Create_GameAttributes(height, (bool)One.IsChecked, "Игрок 1", "Игрок 2");
         }
+        
 
         private void MouseClick(object sender, MouseButtonEventArgs e)
         {
