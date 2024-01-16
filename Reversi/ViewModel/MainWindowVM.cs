@@ -40,7 +40,6 @@ namespace Reversi
         {
             Visibility = "Hidden";
             gameSetter = new GameSetter();
-
             var appSettings = ConfigurationManager.AppSettings;
             low = Convert.ToInt32(appSettings["low"]);
             high = Convert.ToInt32(appSettings["high"]);          
@@ -71,7 +70,7 @@ namespace Reversi
         }
 
         private Command save;
-        public Command Save
+        public Command Save // сохранение текущей игры
         {
             get
             {
@@ -90,7 +89,7 @@ namespace Reversi
         }
        
         private Command load;
-        public Command Load
+        public Command Load // загрузка игры
         {
             get
             {

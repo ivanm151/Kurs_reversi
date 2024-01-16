@@ -1,21 +1,8 @@
-﻿using Microsoft.Win32;
-using Reversi.Model;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Reversi.Model;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 
@@ -32,21 +19,23 @@ namespace Reversi.View
             InitializeComponent();
             DataContext = new ViewModel();
             ((ViewModel)DataContext).AddDiskToField += RenewGameArea;
-            ((ViewModel)DataContext).ShowActivePlayer += ChangeCurrentInfo;            
+            ((ViewModel)DataContext).ShowActivePlayer += ChangeCurrentInfo;
             ((ViewModel)DataContext).StartNewGame += Start_Click;
             ((ViewModel)DataContext).LoadGame1 += LoadGame2;
             ((ViewModel)DataContext).IncorrectInput += IncorrectInput;
             ((ViewModel)DataContext).EndGame += EndGame;
-            
-        }
 
+        }
+        /// <summary>
+        /// неккоректный ввод
+        /// </summary>
         private void IncorrectInput()
         {
             MessageBox.Show("Введите числа от 8 до 15!");
         }
-
-        
-
+        /// <summary>
+        /// конец игры
+        /// </summary>
         private void EndGame()
         {
             int Score1 = ((ViewModel)DataContext).Game.Player1.Score;
@@ -59,7 +48,9 @@ namespace Reversi.View
                 $"\n Начать новую игру?");
             GameArea.Children.Clear();
         }
-
+        /// <summary>
+        /// изменение активного игрока и счета
+        /// </summary>
         private void ChangeCurrentInfo()
         {
             Player player = ((ViewModel)DataContext).Game.ActivePlayer;
@@ -70,7 +61,7 @@ namespace Reversi.View
         private void ChangeScore()
         {
             Player player1 = ((ViewModel)DataContext).Game.Player1;
-            CurrentPlayerName.Content = player1.Player_name;            
+            CurrentPlayerName.Content = player1.Player_name;
             Score.Content = player1.Score;
 
             Player player2 = ((ViewModel)DataContext).Game.Player2;
@@ -82,7 +73,7 @@ namespace Reversi.View
             Start_Click();
             ChangeScore();
         }
-
+        
         private void DrawGameArea(int field_height, int side = 20)
         {
             bool doneDrawingBackground = false;
@@ -134,7 +125,7 @@ namespace Reversi.View
         private void Clear()
         {
             GameArea.Children.Clear();
-            
+
         }
         private void Start_Click()
         {
@@ -144,13 +135,13 @@ namespace Reversi.View
             DrawGameArea(height);
             ((ViewModel)DataContext).Create_GameAttributes(height, (bool)One.IsChecked, "Игрок 1", "Игрок 2");
         }
-        
+
 
         private void MouseClick(object sender, MouseButtonEventArgs e)
         {
             Point p = Mouse.GetPosition(GameArea);
             ((ViewModel)DataContext).Process_Click(p);
-        }   
+        }
     }
 }
 
