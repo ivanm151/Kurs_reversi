@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 
 namespace Reversi.Model
 {
+    /// <summary>
+    /// Игрок
+    /// </summary>
     public class Player
     {
         public string Player_name { get; set; }
-        public int Score { get; set; }
-        public SolidColorBrush Players_brush;
-        public int ID { get; set; }
+        public int Score { get; set; } // кол-во очков полученных игроком
+        public SolidColorBrush Players_brush; // цвет фишек игрока
+        public int ID { get; set; } // первый или второй игрок
         public Player(string name, SolidColorBrush brush, int id, int score = 0)
         {
             Player_name = name;
@@ -21,6 +19,6 @@ namespace Reversi.Model
             ID = id;
         }
 
-       
+
     }
 }

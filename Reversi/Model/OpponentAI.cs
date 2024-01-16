@@ -8,8 +8,27 @@ using System.Windows.Shapes;
 
 namespace Reversi.Model
 {
+    /// <summary>
+    /// ИИ противник-компьютер для режима игры для одного игрока
+    /// </summary>
     public class Computer_Player
     {
+        private static Computer_Player instance;
+
+        private Computer_Player()
+        { }
+        /// <summary>
+        /// Использован паттерн Singleton тк Singleton позволяет создать объект только при его необходимости и в единственном экземпляре.
+        /// Игрок-компьютер создается один раз и только в режиме для одного игрока
+        /// </summary>
+        /// <returns></returns>
+        public static Computer_Player getInstance()
+        {
+            if (instance == null)
+                instance = new Computer_Player();
+            return instance;
+        }
+
         private bool added_successfully;
         private Player player;
         private Ellipse added_marker;
@@ -18,6 +37,11 @@ namespace Reversi.Model
         {
             player = pl;
         }
+        /// <summary>
+        /// ход компьютера
+        /// </summary>
+        /// <param name="game"></param>
+        /// <returns></returns>
         public ((int, int), Ellipse) Computers_Turn(GameAttributes game)
         {
             added_successfully = false;

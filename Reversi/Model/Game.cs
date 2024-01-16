@@ -14,11 +14,16 @@ namespace Reversi.Model
     }
     public class NewGame : ISetGame
     {
-        int height;
+        int height; // размер стороны поля  
+        
         public NewGame(int h)
         {
             height = h;
         }
+        /// <summary>
+        /// создание игрового поля
+        /// </summary>
+        /// <returns></returns>
         public Markers CreateGameField()
         {
             Markers markers = new Markers(height);
@@ -97,32 +102,28 @@ namespace Reversi.Model
             else if (playername == '2')
                 Placed.Add_Marker(r, c, Player2);                      
         }
+        /// <summary>
+        /// подсчет очков
+        /// </summary>
         public void CalculateScore()
         {
             (Player1.Score, Player2.Score) = Placed.CalcScore();
         }
+        /// <summary>
+        /// определение победителя
+        /// </summary>
+        /// <returns></returns>
         public Player Winner()
         {
             if (Player1.Score != Player2.Score)
                 return Player1.Score > Player2.Score ? Player1 : Player2;
             else
                 return new Player("Дружба", null, Player1.Score);
-        }
-        public int[] MarkersToInt()
-        {
-            Markers.Marker[,] markers = Placed.Placed_markers;
-            int h = markers.GetLength(0);
-            int[,] toInt = new int[h, h];
-            for (int i = 0; i < h; i++)
-                for (int j = 0; j < h; j++)
-                {
-                    if (markers[i, j] == null)
-                        toInt[i, j] = 0;
-                    else
-                        toInt[i, j] = markers[i, j].OwnerID;
-                }
-            return toInt.Cast<int>().ToArray();
-        }
+        }        
+        /// <summary>
+        /// Получение строки состоящей из ID игроков, которым принадлежат фишки на поле
+        /// </summary>
+        /// <returns></returns>
         public string Stroka()
         {
             string s = "";
@@ -140,6 +141,10 @@ namespace Reversi.Model
                 }
             return s;
         }
+        /// <summary>
+        /// получение стороны поля
+        /// </summary>
+        /// <returns></returns>
         public int GetHeight()
         {
             Markers.Marker[,] markers = Placed.Placed_markers;
